@@ -5,6 +5,7 @@ import Splash from './src/screens/Splash';
 import MapScreen from './src/screens/MapScreen';
 import Login from './src/screens/auth/Login';
 import UserTab from './src/components/navigation/UserTab';
+import IndexFood from './src/screens/users/food/IndexFood';
 
 export default function App() {
   const Stack = createStackNavigator<RootStackParamList>();
@@ -13,14 +14,17 @@ export default function App() {
     <>
       <NavigationContainer>
         <Stack.Navigator
-          initialRouteName="Home"
+          initialRouteName="Splash"
           screenOptions={{
             headerShown: false,
+            animation: 'slide_from_bottom',
+            gestureEnabled: true,
           }}>
           <Stack.Screen name="Splash" component={Splash} />
           <Stack.Screen name="Login" component={Login} />
           <Stack.Screen name="Map" component={MapScreen} />
           <Stack.Screen name="Home" component={UserTab} />
+          <Stack.Screen name="IndexFood" component={IndexFood} />
         </Stack.Navigator>
       </NavigationContainer>
     </>

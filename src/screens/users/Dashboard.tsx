@@ -1,68 +1,114 @@
 import React from 'react';
 import {
-  Platform,
   Pressable,
   SafeAreaView,
   ScrollView,
-  StatusBar,
   Text,
   View,
   TouchableOpacity,
   TextInput,
+  Alert,
 } from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome5';
 import Svg, {Path, Circle, Ellipse} from 'react-native-svg';
+import {StackNavigationProp} from '@react-navigation/stack';
+import {RootStackParamList} from '../../types/navigationType';
+import StatusBar from '../../components/common/StatusBar';
 
-export default function Dashboard() {
-  const services = [
+type DashboardNavigationProp = StackNavigationProp<
+  RootStackParamList,
+  | 'Home'
+  | 'IndexFood'
+  | 'IndexRide'
+  | 'IndexSend'
+  | 'IndexMart'
+  | 'IndexCar'
+  | 'IndexTagihan'
+  | 'IndexTransit'
+  | 'IndexMore'
+>;
+
+interface DashboardProps {
+  navigation: DashboardNavigationProp;
+}
+
+type ServiceItem = {
+  id: number;
+  name: string;
+  icon: string;
+  color: string;
+  iconColor: string;
+  screen:
+    | 'Home'
+    | 'Splash'
+    | 'Dashboard'
+    | 'IndexFood'
+    | 'IndexRide'
+    | 'IndexSend'
+    | 'IndexMart'
+    | 'IndexCar'
+    | 'IndexTagihan'
+    | 'IndexTransit'
+    | 'IndexMore';
+};
+
+export default function Dashboard({navigation}: DashboardProps) {
+  const services: ServiceItem[] = [
     {
       id: 1,
-      name: 'OjolRide',
+      name: 'Ride',
       icon: 'motorcycle',
       color: 'bg-red-100',
       iconColor: '#dc2626',
+      screen: 'IndexRide', // Assuming you have a Ride screen
     },
     {
       id: 2,
-      name: 'OjolFood',
+      name: 'Food',
       icon: 'utensils',
       color: 'bg-red-100',
       iconColor: '#dc2626',
+      screen: 'IndexFood', // Assuming you have a Food screen
     },
     {
       id: 3,
-      name: 'OjolSend',
+      name: 'Send',
       icon: 'box',
       color: 'bg-slate-100',
       iconColor: '#475569',
+      screen: 'IndexSend', // Assuming you have a Send screen
     },
     {
       id: 4,
-      name: 'OjolMart',
+      name: 'Mart',
       icon: 'shopping-bag',
       color: 'bg-red-100',
       iconColor: '#dc2626',
+      screen: 'IndexMart', // Assuming you have a Mart screen
     },
     {
       id: 5,
-      name: 'OjolCar',
+      name: 'Car',
       icon: 'car',
       color: 'bg-slate-100',
       iconColor: '#475569',
+      screen: 'IndexCar', // Assuming you have a Car screen
     },
     {
       id: 6,
-      name: 'OjolPay',
+      name: 'Tagihan',
       icon: 'wallet',
       color: 'bg-slate-100',
       iconColor: '#475569',
+      screen: 'IndexTagihan', // Assuming you have a Tagihan screen
     },
     {
       id: 7,
-      name: 'OjolClean',
-      icon: 'broom',
+      name: 'Transit',
+      icon: 'bus',
       color: 'bg-red-100',
       iconColor: '#dc2626',
+      screen: 'IndexTransit', // Assuming you have a Transit screen
     },
     {
       id: 8,
@@ -70,6 +116,7 @@ export default function Dashboard() {
       icon: 'th-large',
       color: 'bg-slate-100',
       iconColor: '#475569',
+      screen: 'IndexMore', // Assuming you have a More screen
     },
   ];
 
@@ -97,17 +144,21 @@ export default function Dashboard() {
     },
   ];
 
+  const handleServicePress = (screen: string) => {
+    // Only navigate to screens that actually exist
+    const availableScreens = ['IndexFood']; // Add screens as you create them
+
+    if (availableScreens.includes(screen)) {
+      navigation.navigate(screen as any);
+    } else {
+      // Show alert for unimplemented features
+      Alert.alert('Coming Soon', 'Fitur belum tersedia.', [{text: 'OK'}]);
+    }
+  };
+
   return (
     <>
-      {Platform.OS === 'android' ? (
-        <StatusBar
-          barStyle="light-content"
-          backgroundColor="#EF4444"
-          translucent={false}
-        />
-      ) : (
-        <StatusBar barStyle="light-content" backgroundColor="transparent" />
-      )}
+      <StatusBar />
       <SafeAreaView className="bg-red-600">
         <ScrollView showsVerticalScrollIndicator={false}>
           {/* Header Section */}
@@ -276,8 +327,9 @@ export default function Dashboard() {
             <View className="bg-white mx-2 rounded-2xl px-6 py-2 mb-6">
               <View className="flex-row flex-wrap justify-between">
                 {services.map(service => (
-                  <TouchableOpacity
+                  <Pressable
                     key={service.id}
+                    onPress={() => handleServicePress(service.screen)}
                     className="items-center mb-6 w-[22%]">
                     <View
                       className={`w-20 h-20 ${service.color} rounded-xl items-center justify-center mb-2`}>
@@ -290,7 +342,7 @@ export default function Dashboard() {
                     <Text className="text-black text-sm text-center font-light">
                       {service.name}
                     </Text>
-                  </TouchableOpacity>
+                  </Pressable>
                 ))}
               </View>
             </View>
