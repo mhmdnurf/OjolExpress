@@ -1,18 +1,30 @@
 import React from 'react';
-import {View, Text} from 'react-native';
-import Icon from 'react-native-vector-icons/FontAwesome5';
+import {View, Text, Image, ImageSourcePropType, StyleSheet} from 'react-native';
 import Animated, {FadeInDown} from 'react-native-reanimated';
 
 type CategoryInfoProps = {
-  categories: Array<{id: number; name: string; icon: string}>;
+  categories: Array<{id: number; name: string; image: ImageSourcePropType}>;
   selectedCategory: number;
-  filteredRestaurants: Array<any>;
+  filteredMerchants: Array<any>;
 };
+
+const styles = StyleSheet.create({
+  categoryImage: {
+    width: 16,
+    height: 16,
+    resizeMode: 'contain',
+  },
+});
+
 export default function CategoryInfo({
   categories,
   selectedCategory,
-  filteredRestaurants,
+  filteredMerchants,
 }: CategoryInfoProps) {
+  const selectedCategoryData = categories.find(
+    cat => cat.id === selectedCategory,
+  );
+
   return (
     <>
       {/* Selected Category Info */}
@@ -22,22 +34,19 @@ export default function CategoryInfo({
           entering={FadeInDown.duration(300).springify()}>
           <View className="flex-row items-center">
             <View className="w-10 h-10 bg-red-100 rounded-full items-center justify-center mr-3">
-              <Icon
-                name={
-                  categories.find(cat => cat.id === selectedCategory)?.icon ||
-                  'utensils'
-                }
-                size={16}
-                color="#DC2626"
-              />
+              {selectedCategoryData?.image && (
+                <Image
+                  source={selectedCategoryData.image}
+                  style={styles.categoryImage}
+                />
+              )}
             </View>
             <View>
               <Text className="text-gray-900 font-semibold text-base">
-                {categories.find(cat => cat.id === selectedCategory)?.name ||
-                  'Food'}
+                {selectedCategoryData?.name || 'Food'}
               </Text>
               <Text className="text-gray-500 text-sm">
-                {filteredRestaurants.length} restaurants available
+                {filteredMerchants.length} tempat makanan siap melayani kamu
               </Text>
             </View>
           </View>

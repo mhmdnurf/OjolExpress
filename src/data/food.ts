@@ -1,46 +1,46 @@
 import {CategoryItemType} from '../screens/users/food/components/CategoryItem';
-import {RestaurantItemType} from '../screens/users/food/components/RestaurantItem';
+import {RestaurantItemType} from '../screens/users/food/components/MerchantItem';
 
 export const categories: CategoryItemType[] = [
   {
     id: 0,
     name: 'Food',
-    icon: 'utensils',
+    image: require('../assets/icons/food.png'),
     color: 'bg-orange-100',
     iconColor: '#EA580C',
   },
   {
     id: 1,
     name: 'Drinks',
-    icon: 'cocktail',
+    image: require('../assets/icons/drink.png'),
     color: 'bg-blue-100',
     iconColor: '#2563EB',
   },
   {
     id: 2,
     name: 'Coffee',
-    icon: 'coffee',
+    image: require('../assets/icons/coffee.png'),
     color: 'bg-amber-100',
     iconColor: '#D97706',
   },
   {
     id: 3,
     name: 'Desserts',
-    icon: 'ice-cream',
+    image: require('../assets/icons/desserts.png'),
     color: 'bg-pink-100',
     iconColor: '#EC4899',
   },
   {
     id: 4,
     name: 'Pizza',
-    icon: 'pizza-slice',
+    image: require('../assets/icons/pizza.png'),
     color: 'bg-yellow-100',
     iconColor: '#CA8A04',
   },
   {
     id: 5,
     name: 'Burger',
-    icon: 'hamburger',
+    image: require('../assets/icons/burger.png'),
     color: 'bg-red-100',
     iconColor: '#DC2626',
   },
@@ -80,6 +80,16 @@ export const restaurants: RestaurantItemType[] = [
   {
     id: 4,
     name: 'Starbucks',
+    cuisine: 'Coffee & Drinks',
+    rating: 4.6,
+    deliveryTime: '10-20 min',
+    deliveryFee: 'Rp 8.000',
+    distance: '0.5 km',
+    promo: null,
+  },
+  {
+    id: 5,
+    name: 'Samanko',
     cuisine: 'Coffee & Drinks',
     rating: 4.6,
     deliveryTime: '10-20 min',

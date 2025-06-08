@@ -1,11 +1,11 @@
 import React from 'react';
-import {SafeAreaView, ScrollView, View, Text} from 'react-native';
+import {SafeAreaView, ScrollView, View, Text, StyleSheet} from 'react-native';
 import StatusBar from '../../../components/common/StatusBar';
 import Header from './components/Header';
 import Banner from './components/Banner';
 import CategoryList from './components/CategoryList';
 import CategoryInfo from './components/CategoryInfo';
-import RestaurantItem from './components/RestaurantItem';
+import MerchantItem from './components/MerchantItem';
 import CategoryItem from './components/CategoryItem';
 import CategorySeparator from './components/CategorySeparator';
 import {useFoodScreen} from '../../../hooks/useFoodScreen';
@@ -21,13 +21,32 @@ interface IndexFoodProps {
   navigation: IndexNavigationProps;
 }
 
+const styles = StyleSheet.create({
+  topSafeArea: {
+    flex: 0,
+    backgroundColor: '#DC2626',
+  },
+  bottomSafeArea: {
+    flex: 1,
+    backgroundColor: '#FFFFFF',
+  },
+  container: {
+    flex: 1,
+    backgroundColor: '#DC2626',
+  },
+  scrollView: {
+    flex: 1,
+    backgroundColor: '#FFFFFF',
+  },
+});
+
 export default function IndexFood({navigation}: IndexFoodProps) {
   const {
     searchQuery,
     setSearchQuery,
     selectedCategory,
     handleCategorySelect,
-    filteredRestaurants,
+    filteredMerchants,
     categories,
   } = useFoodScreen();
 
@@ -50,40 +69,46 @@ export default function IndexFood({navigation}: IndexFoodProps) {
   return (
     <>
       <StatusBar />
-      <SafeAreaView className="bg-red-600">
-        <View className="mb-4">
-          <Header onClosePress={() => navigation.goBack()} />
-          <Banner searchQuery={searchQuery} setSearchQuery={setSearchQuery} />
-        </View>
-
-        <ScrollView
-          showsVerticalScrollIndicator={false}
-          className="bg-white min-h-screen">
-          <CategoryList
-            categories={categories}
-            renderCategoryItem={renderCategoryItem}
-            keyExtractor={keyExtractor}
-            CategorySeparator={CategorySeparator}
-          />
-
-          <CategoryInfo
-            categories={categories}
-            selectedCategory={selectedCategory}
-            filteredRestaurants={filteredRestaurants}
-          />
-
-          <View className="px-6">
-            <Text className="text-gray-900 text-lg font-bold mb-4">
-              Recommended for you
-            </Text>
-
-            {filteredRestaurants.map((item, index) => (
-              <RestaurantItem key={item.id} item={item} index={index} />
-            ))}
+      <SafeAreaView style={styles.topSafeArea} />
+      <SafeAreaView style={styles.bottomSafeArea}>
+        <View style={styles.container}>
+          <View className="mb-4">
+            <Header onClosePress={() => navigation.goBack()} />
+            <Banner searchQuery={searchQuery} setSearchQuery={setSearchQuery} />
           </View>
 
-          <View className="h-8" />
-        </ScrollView>
+          <ScrollView
+            style={styles.scrollView}
+            showsVerticalScrollIndicator={false}>
+            <CategoryList
+              categories={categories}
+              renderCategoryItem={renderCategoryItem}
+              keyExtractor={keyExtractor}
+              CategorySeparator={CategorySeparator}
+            />
+
+            <CategoryInfo
+              categories={categories}
+              selectedCategory={selectedCategory}
+              filteredMerchants={filteredMerchants}
+            />
+
+            <View className="px-6">
+              <Text className="text-gray-900 text-lg font-bold mb-4">
+                Lagi Hits, Cobain Yuk!
+              </Text>
+
+              {filteredMerchants.map((item, index) => (
+                <MerchantItem
+                  key={item.id}
+                  item={item}
+                  index={index}
+                  onMerchantPress={() => {}}
+                />
+              ))}
+            </View>
+          </ScrollView>
+        </View>
       </SafeAreaView>
     </>
   );

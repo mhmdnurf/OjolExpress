@@ -20,10 +20,10 @@ export default function CategoryList({
       <View className="py-6">
         <View className="px-6 mb-4">
           <Text className="text-gray-900 text-lg font-bold mb-1">
-            Categories
+            Pilihan Kategori
           </Text>
           <Text className="text-gray-500 text-sm">
-            What would you like to eat today?
+            Yuk, cari makanan favoritmu sekarang!
           </Text>
         </View>
 

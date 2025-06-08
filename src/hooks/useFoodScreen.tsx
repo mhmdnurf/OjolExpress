@@ -1,6 +1,6 @@
 import {useState, useCallback, useMemo} from 'react';
-import {categories, restaurants} from '../constants/food';
-import {RestaurantItemType} from '../screens/users/food/components/RestaurantItem';
+import {categories, restaurants} from '../data/food';
+import {MerchantItemType} from '../screens/users/food/components/MerchantItem';
 
 export const useFoodScreen = () => {
   const [searchQuery, setSearchQuery] = useState('');
@@ -10,22 +10,22 @@ export const useFoodScreen = () => {
     setSelectedCategory(id);
   }, []);
 
-  const filteredRestaurants = useMemo(() => {
-    return restaurants.filter(restaurant => {
+  const filteredMerchants = useMemo(() => {
+    return restaurants.filter(merchant => {
       const selectedCategoryName = categories
         .find(cat => cat.id === selectedCategory)
         ?.name.toLowerCase();
       if (selectedCategoryName === 'food') {
         return true;
       }
-      return restaurant.cuisine
+      return merchant.cuisine
         .toLowerCase()
         .includes(selectedCategoryName || '');
     });
   }, [selectedCategory]);
 
-  const renderRestaurantItem = useCallback(
-    (item: RestaurantItemType, index: number) => ({item, index}),
+  const renderMerchantItem = useCallback(
+    (item: MerchantItemType, index: number) => ({item, index}),
     [],
   );
 
@@ -34,8 +34,8 @@ export const useFoodScreen = () => {
     setSearchQuery,
     selectedCategory,
     handleCategorySelect,
-    filteredRestaurants,
-    renderRestaurantItem,
+    filteredMerchants,
+    renderMerchantItem,
     categories,
   };
 };

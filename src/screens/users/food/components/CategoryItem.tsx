@@ -1,6 +1,5 @@
 import React from 'react';
-import {Pressable, StyleSheet} from 'react-native';
-import Icon from 'react-native-vector-icons/FontAwesome5';
+import {Pressable, StyleSheet, Image, ImageSourcePropType} from 'react-native';
 import Animated, {
   useSharedValue,
   useAnimatedStyle,
@@ -15,7 +14,7 @@ const AnimatedPressable = Animated.createAnimatedComponent(Pressable);
 export interface CategoryItemType {
   id: number;
   name: string;
-  icon: string;
+  image: ImageSourcePropType;
   color: string;
   iconColor: string;
 }
@@ -31,20 +30,29 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     paddingHorizontal: 8,
     minWidth: 80,
-    height: 110, // Fixed total height for the entire component
+    height: 110,
   },
   categoryCircle: {
     justifyContent: 'center',
     alignItems: 'center',
     marginBottom: 12,
-    // Fixed height container to maintain consistent positioning
-    height: 80, // Use the maximum size as the fixed container height
+    height: 80,
   },
   categoryText: {
     textAlign: 'center',
     fontSize: 12,
-    height: 18, // Fixed height for text to maintain bottom alignment
+    height: 18,
     lineHeight: 18,
+  },
+  categoryImage: {
+    width: 32,
+    height: 32,
+    resizeMode: 'contain',
+  },
+  categoryImageSelected: {
+    width: 40,
+    height: 40,
+    resizeMode: 'contain',
   },
 });
 
@@ -64,7 +72,6 @@ const CategoryItem = React.memo<CategoryItemProps>(
 
     const animatedStyle = useAnimatedStyle(() => {
       return {
-        // Remove transform from the main container to prevent layout shifts
         opacity: opacity.value,
       };
     });
@@ -108,18 +115,14 @@ const CategoryItem = React.memo<CategoryItemProps>(
     }, [isSelected, item.id, rotate, scale, onCategorySelect]);
 
     const categorySize = isSelected ? 80 : 64;
-    const iconSize = isSelected ? 26 : 22;
 
     const getBackgroundColor = React.useMemo(() => {
       if (isSelected) {
-        return '#DC2626'; // Red background for selected
+        return '#FEE2E2';
       }
-
-      // Gray background for unselected items
-      return '#F3F4F6'; // Light gray
+      return '#F3F4F6';
     }, [isSelected]);
 
-    const iconColor = isSelected ? '#fff' : item.iconColor;
     const textColor = isSelected ? '#DC2626' : '#000';
 
     const circleStyle: React.ComponentProps<typeof Animated.View>['style'] = {
@@ -141,12 +144,13 @@ const CategoryItem = React.memo<CategoryItemProps>(
         onPress={handlePress}
         style={[styles.categoryContainer, animatedStyle]}>
         <Animated.View style={styles.categoryCircle}>
-          <Animated.View
-            style={[
-              circleStyle,
-              animatedCircleStyle, // Apply scale and rotate only to the circle
-            ]}>
-            <Icon name={item.icon} size={iconSize} color={iconColor} />
+          <Animated.View style={[circleStyle, animatedCircleStyle]}>
+            <Image
+              source={item.image}
+              style={
+                isSelected ? styles.categoryImageSelected : styles.categoryImage
+              }
+            />
           </Animated.View>
         </Animated.View>
 

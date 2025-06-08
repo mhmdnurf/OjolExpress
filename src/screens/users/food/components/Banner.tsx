@@ -16,12 +16,13 @@ export default function Banner({searchQuery, setSearchQuery}: BannerProps) {
           <View className="flex-row items-center justify-between mb-3">
             <View>
               <Text className="text-white text-lg font-bold">
-                Hungry? Let's find food! 🍽️
+                Lapar? Tenang, kami bantu! 🍔
               </Text>
               <Text className="text-white/80 text-sm">
-                Discover amazing restaurants near you
+                Jelajahi tempat makan terbaik dekatmu
               </Text>
             </View>
+
             <View className="w-12 h-12 bg-white/20 rounded-full items-center justify-center">
               <Icon name="utensils" size={20} color="#fff" />
             </View>
