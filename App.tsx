@@ -17,8 +17,6 @@ export default function App() {
           initialRouteName="Splash"
           screenOptions={{
             headerShown: false,
-            animation: 'slide_from_bottom',
-            gestureEnabled: true,
           }}>
           <Stack.Screen name="Splash" component={Splash} />
           <Stack.Screen name="Login" component={Login} />
