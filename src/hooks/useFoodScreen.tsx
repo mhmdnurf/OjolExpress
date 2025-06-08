@@ -1,5 +1,5 @@
 import {useState, useCallback, useMemo} from 'react';
-import {categories, restaurants} from '../data/food';
+import {categories, merchants} from '../data/food';
 import {MerchantItemType} from '../screens/users/food/components/MerchantItem';
 
 export const useFoodScreen = () => {
@@ -11,7 +11,7 @@ export const useFoodScreen = () => {
   }, []);
 
   const filteredMerchants = useMemo(() => {
-    return restaurants.filter(merchant => {
+    return merchants.filter(merchant => {
       const selectedCategoryName = categories
         .find(cat => cat.id === selectedCategory)
         ?.name.toLowerCase();

@@ -1,5 +1,5 @@
 import {CategoryItemType} from '../screens/users/food/components/CategoryItem';
-import {RestaurantItemType} from '../screens/users/food/components/MerchantItem';
+import {MerchantItemType} from '../screens/users/food/components/MerchantItem';
 
 export const categories: CategoryItemType[] = [
   {
@@ -46,7 +46,7 @@ export const categories: CategoryItemType[] = [
   },
 ];
 
-export const restaurants: RestaurantItemType[] = [
+export const merchants: MerchantItemType[] = [
   {
     id: 1,
     name: "McDonald's",
