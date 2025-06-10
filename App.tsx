@@ -5,7 +5,8 @@ import Splash from './src/screens/Splash';
 import MapScreen from './src/screens/MapScreen';
 import Login from './src/screens/auth/Login';
 import UserTab from './src/components/navigation/UserTab';
-import IndexFood from './src/screens/users/food/IndexFood';
+import IndexFood from './src/screens/users/food/screens/IndexFood';
+import FoodDetail from './src/screens/users/food/screens/FoodDetail';
 
 export default function App() {
   const Stack = createStackNavigator<RootStackParamList>();
@@ -14,7 +15,7 @@ export default function App() {
     <>
       <NavigationContainer>
         <Stack.Navigator
-          initialRouteName="Splash"
+          initialRouteName="IndexFood"
           screenOptions={{
             headerShown: false,
           }}>
@@ -23,6 +24,7 @@ export default function App() {
           <Stack.Screen name="Map" component={MapScreen} />
           <Stack.Screen name="Home" component={UserTab} />
           <Stack.Screen name="IndexFood" component={IndexFood} />
+          <Stack.Screen name="FoodDetail" component={FoodDetail} />
         </Stack.Navigator>
       </NavigationContainer>
     </>

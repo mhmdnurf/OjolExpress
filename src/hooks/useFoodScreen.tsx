@@ -11,18 +11,47 @@ export const useFoodScreen = () => {
   }, []);
 
   const filteredMerchants = useMemo(() => {
-    return merchants.filter(merchant => {
-      const selectedCategoryName = categories
-        .find(cat => cat.id === selectedCategory)
-        ?.name.toLowerCase();
-      if (selectedCategoryName === 'food') {
-        return true;
-      }
-      return merchant.cuisine
-        .toLowerCase()
-        .includes(selectedCategoryName || '');
-    });
-  }, [selectedCategory]);
+    let filtered = merchants;
+
+    // Filter by category using categories array
+    const selectedCategoryName = categories
+      .find(cat => cat.id === selectedCategory)
+      ?.name.toLowerCase();
+
+    // Mapping category display name ke internal tags
+    const categoryToTagsMap: Record<string, string[]> = {
+      food: ['food', 'fast-food', 'pizza', 'italian'],
+      drinks: ['beverages', 'coffee', 'juice', 'smoothies'], // drinks -> beverages
+      coffee: ['coffee', 'specialty-coffee'],
+      desserts: ['desserts', 'ice-cream', 'bakery'],
+      pizza: ['pizza', 'italian'],
+      burger: ['burger', 'fast-food'],
+    };
+
+    const allowedTags = categoryToTagsMap[selectedCategoryName || ''];
+
+    if (allowedTags && allowedTags.length > 0) {
+      filtered = filtered.filter(merchant =>
+        allowedTags.some(
+          tag => merchant.categories.includes(tag), // Menggunakan categories array
+        ),
+      );
+    }
+
+    // Filter by search query
+    if (searchQuery.trim()) {
+      filtered = filtered.filter(
+        merchant =>
+          merchant.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
+          merchant.cuisine.toLowerCase().includes(searchQuery.toLowerCase()) ||
+          merchant.categories.some(category =>
+            category.toLowerCase().includes(searchQuery.toLowerCase()),
+          ),
+      );
+    }
+
+    return filtered;
+  }, [selectedCategory, searchQuery]);
 
   const renderMerchantItem = useCallback(
     (item: MerchantItemType, index: number) => ({item, index}),
