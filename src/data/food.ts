@@ -55,6 +55,7 @@ export const merchants: MerchantItemType[] = [
     rating: 4.5,
     deliveryTime: '15-25 min',
     deliveryFee: 'Free',
+    status: 'open',
     distance: '0.8 km',
     promo: 'Buy 1 Get 1',
     image: require('../assets/images/merchants/mcd.png'),
@@ -68,6 +69,7 @@ export const merchants: MerchantItemType[] = [
     deliveryTime: '20-30 min',
     deliveryFee: 'Rp 5.000',
     distance: '1.2 km',
+    status: 'open',
     promo: null,
     image: require('../assets/images/merchants/kfc.png'),
   },
@@ -81,6 +83,7 @@ export const merchants: MerchantItemType[] = [
     deliveryFee: 'Free',
     distance: '2.1 km',
     promo: 'Free Delivery',
+    status: 'open',
     image: require('../assets/images/merchants/pizzahut.png'),
   },
   {
@@ -93,6 +96,7 @@ export const merchants: MerchantItemType[] = [
     deliveryFee: 'Rp 8.000',
     distance: '0.5 km',
     promo: 'Free Upgrade Size',
+    status: 'open',
     image: require('../assets/images/merchants/samanko.png'),
   },
   {
@@ -105,6 +109,7 @@ export const merchants: MerchantItemType[] = [
     deliveryFee: 'Rp 6.000',
     distance: '1.5 km',
     promo: null,
+    status: 'closed',
     image: require('../assets/images/merchants/kopilainhati.png'),
   },
   {
@@ -118,6 +123,7 @@ export const merchants: MerchantItemType[] = [
     distance: '2.8 km',
     promo: 'Buy 2 Get 1',
     image: require('../assets/images/merchants/cooler-city.png'),
+    status: 'open',
   },
   {
     id: 7,
@@ -130,5 +136,6 @@ export const merchants: MerchantItemType[] = [
     distance: '1.0 km',
     promo: null,
     image: require('../assets/images/merchants/wedrink.png'),
+    status: 'open',
   },
 ];

@@ -84,6 +84,7 @@ export default function IndexFood({navigation}: IndexFoodProps) {
           navigation.navigate('FoodDetail', {
             merchantId: merchantId,
             merchantName: item.name,
+            merchantImage: item.image,
           });
         }}
       />

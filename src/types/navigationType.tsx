@@ -1,3 +1,5 @@
+import {ImageSourcePropType} from 'react-native';
+
 export type RootStackParamList = {
   Splash: undefined;
   Login: undefined;
@@ -7,6 +9,7 @@ export type RootStackParamList = {
   FoodDetail: {
     merchantId: number;
     merchantName: string;
+    merchantImage: ImageSourcePropType;
   };
 };
 

@@ -15,7 +15,7 @@ export default function App() {
     <>
       <NavigationContainer>
         <Stack.Navigator
-          initialRouteName="IndexFood"
+          initialRouteName="Splash"
           screenOptions={{
             headerShown: false,
           }}>

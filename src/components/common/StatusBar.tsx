@@ -1,14 +1,22 @@
 import React from 'react';
 import {Platform, StatusBar as RNStatusBar} from 'react-native';
 
-export default function StatusBar() {
+type StatusBarProps = {
+  backgroundColor?: string;
+  translucent?: boolean;
+};
+
+export default function StatusBar({
+  backgroundColor = '#dc2626',
+  translucent = false,
+}: StatusBarProps) {
   return (
     <>
       {Platform.OS === 'android' ? (
         <RNStatusBar
           barStyle="light-content"
-          backgroundColor="#dc2626"
-          translucent={false}
+          backgroundColor={backgroundColor}
+          translucent={translucent}
         />
       ) : (
         <RNStatusBar barStyle="light-content" backgroundColor="transparent" />
